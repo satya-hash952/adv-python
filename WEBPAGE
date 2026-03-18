@@ -1,0 +1,120 @@
+from tkinter import *
+from PIL import Image, ImageTk
+
+root = Tk()
+root.title("McLaren App")
+root.geometry("500x500+0+0")
+root.resizable(False, False)
+
+left_frame = Frame(root, bg="#0f172a", width=400, height=500)
+left_frame.pack(side=LEFT, fill=BOTH)
+
+
+img = Image.open("mclaren.png")
+img = img.resize((200, 120))
+logo = ImageTk.PhotoImage(img)
+
+img_label = Label(left_frame, image=logo, bg="#0f172a")
+img_label.pack(pady=60)
+
+title = Label(left_frame, text="McLaren",
+              font=("Arial", 24, "bold"),
+              bg="#0f172a", fg="white")
+title.pack()
+
+subtitle = Label(left_frame, text="Speed meets luxury",
+                 font=("Arial", 12),
+                 bg="#0f172a", fg="lightgrey")
+subtitle.pack(pady=10)
+
+
+right_frame = Frame(root, bg="white", width=400, height=500)
+right_frame.pack(side=RIGHT, fill=BOTH)
+
+heading = Label(right_frame, text="Login",
+                font=("Arial", 20, "bold"),
+                bg="white", fg="#333")
+heading.pack(pady=20)
+
+
+search_frame = Frame(right_frame, bg="#f1f5f9")
+search_frame.pack(pady=10)
+
+search_var = StringVar()
+
+search_entry = Entry(search_frame,
+                     textvariable=search_var,
+                     font=("Arial", 12),
+                     bd=0,
+                     bg="#f1f5f9",
+                     width=25)
+search_entry.pack(padx=10, pady=8)
+
+def on_click(event):
+    if search_entry.get() == "Search cars...":
+        search_entry.delete(0, END)
+        search_entry.config(fg="black")
+
+def on_leave(event):
+    if search_entry.get() == "":
+        search_entry.insert(0, "Search cars...")
+        search_entry.config(fg="grey")
+
+search_entry.insert(0, "Search cars...")
+search_entry.config(fg="black")
+
+search_entry.bind("<FocusIn>", on_click)
+search_entry.bind("<FocusOut>", on_leave)
+
+
+email_label = Label(right_frame, text="Email",
+                    font=("Arial", 12),
+                    bg="white")
+email_label.pack(anchor="w", padx=50, pady=(15, 5))
+
+email_entry = Entry(right_frame,
+                    font=("Arial", 12),
+                    width=30)
+email_entry.pack(padx=50)
+
+
+password_label = Label(right_frame, text="Password",
+                       font=("Arial", 12),
+                       bg="white")
+password_label.pack(anchor="w", padx=50, pady=(15, 5))
+
+password_entry = Entry(right_frame,
+                       font=("Arial", 12),
+                       width=30,
+                       show="*")
+password_entry.pack(padx=50)
+
+def login():
+    print("Email:", email_entry.get())
+    print("Password:", password_entry.get())
+
+def search():
+    print("Searching:", search_var.get())
+
+login_btn = Button(right_frame,
+                   text="Login",
+                   command=login,
+                   font=("Arial", 12, "bold"),
+                   bg="#adbdde",
+                   fg="white",
+                   padx=10,
+                   pady=5)
+login_btn.pack(pady=20)
+
+search_btn = Button(right_frame,
+                    text="Search",
+                    command=search,
+                    font=("Arial", 10, "bold"),
+                    bg="#444",
+                    fg="white")
+search_btn.pack()
+
+root.mainloop()
+        
+        
+
