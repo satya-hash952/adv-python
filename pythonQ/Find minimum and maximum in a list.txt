@@ -1,0 +1,2 @@
+lst = [3, 1, 7, 0, 5]
+print(min(lst), max(lst))

@@ -1,0 +1,14 @@
+num = 153
+temp = num
+sum_val = 0
+digits = len(str(num))
+
+while temp > 0:
+    digit = temp % 10
+    sum_val += digit ** digits
+    temp //= 10
+
+if sum_val == num:
+    print("Armstrong")
+else:
+    print("Not Armstrong")
